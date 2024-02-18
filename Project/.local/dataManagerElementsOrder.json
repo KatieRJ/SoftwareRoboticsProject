@@ -1,0 +1,37 @@
+{
+  "Workflows": [
+    {
+      "Path": null,
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [],
+      "ArgumentsSectionElementsOrder": null,
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Main.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "rowText&Sequence_2",
+        "splitInvoiceRow&Sequence_2",
+        "totalAmount&Sequence_2",
+        "vatAmount&Sequence_2",
+        "dt_InvoiceHeader&Sequence_1",
+        "dt_InvoiceRow&Sequence_1",
+        "files&Sequence_1",
+        "pdfText&Sequence_1",
+        "companyCode&Sequence_1",
+        "referenceNumber&Sequence_2",
+        "companyName&Sequence_2",
+        "invoiceNumber&Sequence_2",
+        "invoiceDate&Sequence_2",
+        "dueDate&Sequence_2",
+        "bankAccountNumber&Sequence_2",
+        "amountExclVat&Sequence_2"
+      ],
+      "ArgumentsSectionElementsOrder": [],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    }
+  ]
+}
