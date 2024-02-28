@@ -29,9 +29,40 @@ Read CSV file to list
     Make Connection    ${dbname}
     ${outputHeader}=    Get File    ${PATH}InvoiceHeaderData.csv
     ${outputRows}=    Get File    ${PATH}InvoiceRowData.csv
-
-    # Process each line as an individual element
-
     Log    ${outputHeader}
     Log    ${outputRows}
 
+    # Process each line as an individual element
+
+    @{headers}=    Split String    ${outputHeader}    \n
+    @{rows}=    Split String    ${outputRows}    \n
+
+    # Remove the first (title) line and the last (empty) line
+
+    ${length}=    Get Length    ${headers}
+    ${length}=    Evaluate    ${length}-1
+
+    ${index}=    Convert To Integer    0
+
+    Remove From List    ${headers}    ${length}
+    Remove From List    ${headers}    ${index}
+
+    ${length}=    Get Length    ${rows}
+    ${length}=    Evaluate    ${length}-1
+
+    Remove From List    ${rows}    ${length}
+    Remove From List    ${rows}    ${index}
+
+
+    FOR    ${element}    IN    @{headers}
+        Log    ${element}
+        
+    END
+
+    FOR    ${element}    IN    @{rows}
+        Log    ${element}
+        
+    END
+    
+    Set Global Variable    ${headers}
+    Set Global Variable    ${rows}
