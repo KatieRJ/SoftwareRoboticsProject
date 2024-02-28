@@ -3,7 +3,6 @@ Library    String
 Library    Collections
 Library    OperatingSystem
 Library    DatabaseLibrary
-Library    
 
 *** Variables ***
 ${PATH}    C:/Users/royha/OneDrive - Hämeen ammattikorkeakoulu/Software Robotics and Automation/Project/RobotFramework/
@@ -21,7 +20,7 @@ ${dbport}    3306
 *** Keywords ***
 Make Connection
     [Arguments]    ${dbtoconnect}
-    Connect To Database    dbapiModuleName=pymysql    dbName=${dbtoconnect}    dbUsername=${dbuser}    dbPassword=${dbpass}    dbHost=${dbhost}    dbPort=${dbport}
+    Connect To Database    pymysql    ${dbtoconnect}    ${dbuser}    ${dbpass}    ${dbhost}    ${dbport}
 
 *** Test Cases ***
 
@@ -41,7 +40,6 @@ Read CSV file to list
 
     ${length}=    Get Length    ${headers}
     ${length}=    Evaluate    ${length}-1
-
     ${index}=    Convert To Integer    0
 
     Remove From List    ${headers}    ${length}

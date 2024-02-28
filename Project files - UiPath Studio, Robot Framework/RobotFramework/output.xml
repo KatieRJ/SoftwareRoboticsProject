@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.1.1 (Python 3.11.4 on win32)" generated="20240228 21:23:23.853" rpa="false" schemaversion="4">
+<robot generator="Robot 6.1.1 (Python 3.11.4 on win32)" generated="20240228 22:04:10.860" rpa="false" schemaversion="4">
 <suite id="s1" name="Rf Project" source="c:\Users\royha\OneDrive - Hämeen ammattikorkeakoulu\Software Robotics and Automation\SoftwareRoboticsProject\Project files - UiPath Studio, Robot Framework\RobotFramework\rf_project.robot">
-<test id="s1-t1" name="Read CSV file to list" line="28">
+<test id="s1-t1" name="Read CSV file to list" line="27">
 <kw name="Make Connection">
 <arg>${dbname}</arg>
 <kw name="Connect To Database" library="DatabaseLibrary">
-<arg>dbapiModuleName=pymysql</arg>
-<arg>dbName=${dbtoconnect}</arg>
-<arg>dbUsername=${dbuser}</arg>
-<arg>dbPassword=${dbpass}</arg>
-<arg>dbHost=${dbhost}</arg>
-<arg>dbPort=${dbport}</arg>
+<arg>pymysql</arg>
+<arg>${dbtoconnect}</arg>
+<arg>${dbuser}</arg>
+<arg>${dbpass}</arg>
+<arg>${dbhost}</arg>
+<arg>${dbport}</arg>
 <doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to
 connect to the database using `dbName`, `dbUsername`, and `dbPassword`.</doc>
-<msg timestamp="20240228 21:23:23.940" level="INFO">Connecting using : pymysql.connect(db=rpa, user=robotuser, passwd=***, host=localhost, port=3306, charset=None) </msg>
-<status status="PASS" starttime="20240228 21:23:23.900" endtime="20240228 21:23:23.950"/>
+<msg timestamp="20240228 22:04:10.950" level="INFO">Connecting using : pymysql.connect(db=rpa, user=robotuser, passwd=***, host=localhost, port=3306, charset=None) </msg>
+<status status="PASS" starttime="20240228 22:04:10.908" endtime="20240228 22:04:10.969"/>
 </kw>
-<status status="PASS" starttime="20240228 21:23:23.900" endtime="20240228 21:23:23.950"/>
+<status status="PASS" starttime="20240228 22:04:10.907" endtime="20240228 22:04:10.969"/>
 </kw>
 <kw name="Get File" library="OperatingSystem">
 <var>${outputHeader}</var>
 <arg>${PATH}InvoiceHeaderData.csv</arg>
 <doc>Returns the contents of a specified file.</doc>
-<msg timestamp="20240228 21:23:23.951" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\royha\OneDrive - Hämeen ammattikorkeakoulu\Software Robotics and Automation\Project\RobotFramework\InvoiceHeaderData.csv"&gt;C:\Users\royha\OneDrive - Hämeen ammattikorkeakoulu\Software Robotics and Automation\Project\RobotFramework\InvoiceHeaderData.csv&lt;/a&gt;'.</msg>
-<msg timestamp="20240228 21:23:23.953" level="INFO">${outputHeader} = ﻿InvoiceNumber;CompanyName;ReferenceNumber;InvoiceDate;DueDate;CompanyCode;BankAccoundNumber;AmountExclVAT;VATAmount;TotalAmount
-143143;Service Provider Oy;1431432;15.12.2022;07.04.2021;1234567-8;FI12...</msg>
-<status status="PASS" starttime="20240228 21:23:23.951" endtime="20240228 21:23:23.953"/>
+<msg timestamp="20240228 22:04:10.970" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\royha\OneDrive - Hämeen ammattikorkeakoulu\Software Robotics and Automation\Project\RobotFramework\InvoiceHeaderData.csv"&gt;C:\Users\royha\OneDrive - Hämeen ammattikorkeakoulu\Software Robotics and Automation\Project\RobotFramework\InvoiceHeaderData.csv&lt;/a&gt;'.</msg>
+<msg timestamp="20240228 22:04:10.971" level="INFO">${outputHeader} = ﻿InvoiceNumber;CompanyName;ReferenceNumber;InvoiceDate;DueDate;CompanyCode;BankAccoundNumber;AmountExclVAT;VATAmount;TotalAmount
+143143;Service Provider Oy;1431432;15.12.2022;7.4.2021;1234567-8;FI12 3...</msg>
+<status status="PASS" starttime="20240228 22:04:10.970" endtime="20240228 22:04:10.971"/>
 </kw>
 <kw name="Get File" library="OperatingSystem">
 <var>${outputRows}</var>
 <arg>${PATH}InvoiceRowData.csv</arg>
 <doc>Returns the contents of a specified file.</doc>
-<msg timestamp="20240228 21:23:23.954" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\royha\OneDrive - Hämeen ammattikorkeakoulu\Software Robotics and Automation\Project\RobotFramework\InvoiceRowData.csv"&gt;C:\Users\royha\OneDrive - Hämeen ammattikorkeakoulu\Software Robotics and Automation\Project\RobotFramework\InvoiceRowData.csv&lt;/a&gt;'.</msg>
-<msg timestamp="20240228 21:23:23.954" level="INFO">${outputRows} = ﻿Description;Quantity;Unit;UnitPrice;VATPercent;VAT;Total;InvoiceNumber;RowNumber
+<msg timestamp="20240228 22:04:10.971" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\royha\OneDrive - Hämeen ammattikorkeakoulu\Software Robotics and Automation\Project\RobotFramework\InvoiceRowData.csv"&gt;C:\Users\royha\OneDrive - Hämeen ammattikorkeakoulu\Software Robotics and Automation\Project\RobotFramework\InvoiceRowData.csv&lt;/a&gt;'.</msg>
+<msg timestamp="20240228 22:04:10.972" level="INFO">${outputRows} = ﻿Description;Quantity;Unit;UnitPrice;VATPercent;VAT;Total;InvoiceNumber;RowNumber
 Installation Services;5;h;60;24;72;372;143143;1
 Replacement Products;10;kpl;105;24;252;1302;143143;2
 Keyboard Logitech...</msg>
-<status status="PASS" starttime="20240228 21:23:23.953" endtime="20240228 21:23:23.954"/>
+<status status="PASS" starttime="20240228 22:04:10.971" endtime="20240228 22:04:10.972"/>
 </kw>
 <kw name="Log" library="BuiltIn">
 <arg>${outputHeader}</arg>
 <doc>Logs the given message with the given level.</doc>
-<msg timestamp="20240228 21:23:23.955" level="INFO">﻿InvoiceNumber;CompanyName;ReferenceNumber;InvoiceDate;DueDate;CompanyCode;BankAccoundNumber;AmountExclVAT;VATAmount;TotalAmount
-143143;Service Provider Oy;1431432;15.12.2022;07.04.2021;1234567-8;FI12 3456 7890 1234 56;1350;324;1674
-1543235;Component Oy;15432359;01.10.2022;" 15.10.202";1234567-9;"FI05 1234 5600 7891 01
+<msg timestamp="20240228 22:04:10.973" level="INFO">﻿InvoiceNumber;CompanyName;ReferenceNumber;InvoiceDate;DueDate;CompanyCode;BankAccoundNumber;AmountExclVAT;VATAmount;TotalAmount
+143143;Service Provider Oy;1431432;15.12.2022;7.4.2021;1234567-8;FI12 3456 7890 1234 56;1350;324;1674
+1543235;Component Oy;15432359;1.10.2022; 15.10.2022;1234567-9;"FI05 1234 5600 7891 01
 ";465;111.6;576.6
-153143;Service Provider Oy;1531439;15.12.2022;01.04.2021;1234567-8;FI12 3456 7890 1234 56;2700;648;3348
+153143;Service Provider Oy;1531439;15.12.2022;1.4.2021;1234567-8;FI12 3456 7890 1234 56;2700;648;3348
 </msg>
-<status status="PASS" starttime="20240228 21:23:23.954" endtime="20240228 21:23:23.955"/>
+<status status="PASS" starttime="20240228 22:04:10.972" endtime="20240228 22:04:10.973"/>
 </kw>
 <kw name="Log" library="BuiltIn">
 <arg>${outputRows}</arg>
 <doc>Logs the given message with the given level.</doc>
-<msg timestamp="20240228 21:23:23.955" level="INFO">﻿Description;Quantity;Unit;UnitPrice;VATPercent;VAT;Total;InvoiceNumber;RowNumber
+<msg timestamp="20240228 22:04:10.974" level="INFO">﻿Description;Quantity;Unit;UnitPrice;VATPercent;VAT;Total;InvoiceNumber;RowNumber
 Installation Services;5;h;60;24;72;372;143143;1
 Replacement Products;10;kpl;105;24;252;1302;143143;2
 Keyboard Logitech;10;kpl;40;24;96;496;1543235;1
@@ -62,129 +62,129 @@ Replacement Products;10;kpl;105;24;252;1302;153143;2
 Cleaning Services;5;h;60;24;72;372;153143;3
 Cleaning Wipes;10;kpl;105;24;252;1302;153143;4
 </msg>
-<status status="PASS" starttime="20240228 21:23:23.955" endtime="20240228 21:23:23.955"/>
+<status status="PASS" starttime="20240228 22:04:10.974" endtime="20240228 22:04:10.974"/>
 </kw>
 <kw name="Split String" library="String">
 <var>@{headers}</var>
 <arg>${outputHeader}</arg>
 <arg>\n</arg>
 <doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
-<msg timestamp="20240228 21:23:23.956" level="INFO">@{headers} = [ ﻿InvoiceNumber;CompanyName;ReferenceNumber;InvoiceDate;DueDate;CompanyCode;BankAccoundNumber;AmountExclVAT;VATAmount;TotalAmount | 143143;Service Provider Oy;1431432;15.12.2022;07.04.2021;1234567-8;...</msg>
-<status status="PASS" starttime="20240228 21:23:23.956" endtime="20240228 21:23:23.956"/>
+<msg timestamp="20240228 22:04:10.974" level="INFO">@{headers} = [ ﻿InvoiceNumber;CompanyName;ReferenceNumber;InvoiceDate;DueDate;CompanyCode;BankAccoundNumber;AmountExclVAT;VATAmount;TotalAmount | 143143;Service Provider Oy;1431432;15.12.2022;7.4.2021;1234567-8;FI...</msg>
+<status status="PASS" starttime="20240228 22:04:10.974" endtime="20240228 22:04:10.974"/>
 </kw>
 <kw name="Split String" library="String">
 <var>@{rows}</var>
 <arg>${outputRows}</arg>
 <arg>\n</arg>
 <doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
-<msg timestamp="20240228 21:23:23.957" level="INFO">@{rows} = [ ﻿Description;Quantity;Unit;UnitPrice;VATPercent;VAT;Total;InvoiceNumber;RowNumber | Installation Services;5;h;60;24;72;372;143143;1 | Replacement Products;10;kpl;105;24;252;1302;143143;2 | Keyboard ...</msg>
-<status status="PASS" starttime="20240228 21:23:23.956" endtime="20240228 21:23:23.957"/>
+<msg timestamp="20240228 22:04:10.975" level="INFO">@{rows} = [ ﻿Description;Quantity;Unit;UnitPrice;VATPercent;VAT;Total;InvoiceNumber;RowNumber | Installation Services;5;h;60;24;72;372;143143;1 | Replacement Products;10;kpl;105;24;252;1302;143143;2 | Keyboard ...</msg>
+<status status="PASS" starttime="20240228 22:04:10.975" endtime="20240228 22:04:10.975"/>
 </kw>
 <kw name="Get Length" library="BuiltIn">
 <var>${length}</var>
 <arg>${headers}</arg>
 <doc>Returns and logs the length of the given item as an integer.</doc>
-<msg timestamp="20240228 21:23:23.958" level="INFO">Length is 6</msg>
-<msg timestamp="20240228 21:23:23.958" level="INFO">${length} = 6</msg>
-<status status="PASS" starttime="20240228 21:23:23.957" endtime="20240228 21:23:23.958"/>
+<msg timestamp="20240228 22:04:10.976" level="INFO">Length is 6</msg>
+<msg timestamp="20240228 22:04:10.976" level="INFO">${length} = 6</msg>
+<status status="PASS" starttime="20240228 22:04:10.976" endtime="20240228 22:04:10.976"/>
 </kw>
 <kw name="Evaluate" library="BuiltIn">
 <var>${length}</var>
 <arg>${length}-1</arg>
 <doc>Evaluates the given expression in Python and returns the result.</doc>
-<msg timestamp="20240228 21:23:23.958" level="INFO">${length} = 5</msg>
-<status status="PASS" starttime="20240228 21:23:23.958" endtime="20240228 21:23:23.959"/>
+<msg timestamp="20240228 22:04:10.976" level="INFO">${length} = 5</msg>
+<status status="PASS" starttime="20240228 22:04:10.976" endtime="20240228 22:04:10.976"/>
 </kw>
 <kw name="Convert To Integer" library="BuiltIn">
 <var>${index}</var>
 <arg>0</arg>
 <doc>Converts the given item to an integer number.</doc>
-<msg timestamp="20240228 21:23:23.959" level="INFO">${index} = 0</msg>
-<status status="PASS" starttime="20240228 21:23:23.959" endtime="20240228 21:23:23.959"/>
+<msg timestamp="20240228 22:04:10.977" level="INFO">${index} = 0</msg>
+<status status="PASS" starttime="20240228 22:04:10.977" endtime="20240228 22:04:10.977"/>
 </kw>
 <kw name="Remove From List" library="Collections">
 <arg>${headers}</arg>
 <arg>${length}</arg>
 <doc>Removes and returns the value specified with an ``index`` from ``list``.</doc>
-<status status="PASS" starttime="20240228 21:23:23.959" endtime="20240228 21:23:23.959"/>
+<status status="PASS" starttime="20240228 22:04:10.977" endtime="20240228 22:04:10.977"/>
 </kw>
 <kw name="Remove From List" library="Collections">
 <arg>${headers}</arg>
 <arg>${index}</arg>
 <doc>Removes and returns the value specified with an ``index`` from ``list``.</doc>
-<status status="PASS" starttime="20240228 21:23:23.959" endtime="20240228 21:23:23.959"/>
+<status status="PASS" starttime="20240228 22:04:10.978" endtime="20240228 22:04:10.978"/>
 </kw>
 <kw name="Get Length" library="BuiltIn">
 <var>${length}</var>
 <arg>${rows}</arg>
 <doc>Returns and logs the length of the given item as an integer.</doc>
-<msg timestamp="20240228 21:23:23.959" level="INFO">Length is 10</msg>
-<msg timestamp="20240228 21:23:23.959" level="INFO">${length} = 10</msg>
-<status status="PASS" starttime="20240228 21:23:23.959" endtime="20240228 21:23:23.959"/>
+<msg timestamp="20240228 22:04:10.978" level="INFO">Length is 10</msg>
+<msg timestamp="20240228 22:04:10.978" level="INFO">${length} = 10</msg>
+<status status="PASS" starttime="20240228 22:04:10.978" endtime="20240228 22:04:10.978"/>
 </kw>
 <kw name="Evaluate" library="BuiltIn">
 <var>${length}</var>
 <arg>${length}-1</arg>
 <doc>Evaluates the given expression in Python and returns the result.</doc>
-<msg timestamp="20240228 21:23:23.959" level="INFO">${length} = 9</msg>
-<status status="PASS" starttime="20240228 21:23:23.959" endtime="20240228 21:23:23.959"/>
+<msg timestamp="20240228 22:04:10.980" level="INFO">${length} = 9</msg>
+<status status="PASS" starttime="20240228 22:04:10.979" endtime="20240228 22:04:10.980"/>
 </kw>
 <kw name="Remove From List" library="Collections">
 <arg>${rows}</arg>
 <arg>${length}</arg>
 <doc>Removes and returns the value specified with an ``index`` from ``list``.</doc>
-<status status="PASS" starttime="20240228 21:23:23.959" endtime="20240228 21:23:23.959"/>
+<status status="PASS" starttime="20240228 22:04:10.980" endtime="20240228 22:04:10.980"/>
 </kw>
 <kw name="Remove From List" library="Collections">
 <arg>${rows}</arg>
 <arg>${index}</arg>
 <doc>Removes and returns the value specified with an ``index`` from ``list``.</doc>
-<status status="PASS" starttime="20240228 21:23:23.959" endtime="20240228 21:23:23.959"/>
+<status status="PASS" starttime="20240228 22:04:10.980" endtime="20240228 22:04:10.981"/>
 </kw>
 <for flavor="IN">
 <var>${element}</var>
 <value>@{headers}</value>
 <iter>
-<var name="${element}">143143;Service Provider Oy;1431432;15.12.2022;07.04.2021;1234567-8;FI12 3456 7890 1234 56;1350;324;1674</var>
+<var name="${element}">143143;Service Provider Oy;1431432;15.12.2022;7.4.2021;1234567-8;FI12 3456 7890 1234 56;1350;324;1674</var>
 <kw name="Log" library="BuiltIn">
 <arg>${element}</arg>
 <doc>Logs the given message with the given level.</doc>
-<msg timestamp="20240228 21:23:23.963" level="INFO">143143;Service Provider Oy;1431432;15.12.2022;07.04.2021;1234567-8;FI12 3456 7890 1234 56;1350;324;1674</msg>
-<status status="PASS" starttime="20240228 21:23:23.963" endtime="20240228 21:23:23.963"/>
+<msg timestamp="20240228 22:04:10.981" level="INFO">143143;Service Provider Oy;1431432;15.12.2022;7.4.2021;1234567-8;FI12 3456 7890 1234 56;1350;324;1674</msg>
+<status status="PASS" starttime="20240228 22:04:10.981" endtime="20240228 22:04:10.981"/>
 </kw>
-<status status="PASS" starttime="20240228 21:23:23.963" endtime="20240228 21:23:23.963"/>
+<status status="PASS" starttime="20240228 22:04:10.981" endtime="20240228 22:04:10.981"/>
 </iter>
 <iter>
-<var name="${element}">1543235;Component Oy;15432359;01.10.2022;" 15.10.202";1234567-9;"FI05 1234 5600 7891 01</var>
+<var name="${element}">1543235;Component Oy;15432359;1.10.2022; 15.10.2022;1234567-9;"FI05 1234 5600 7891 01</var>
 <kw name="Log" library="BuiltIn">
 <arg>${element}</arg>
 <doc>Logs the given message with the given level.</doc>
-<msg timestamp="20240228 21:23:23.964" level="INFO">1543235;Component Oy;15432359;01.10.2022;" 15.10.202";1234567-9;"FI05 1234 5600 7891 01</msg>
-<status status="PASS" starttime="20240228 21:23:23.964" endtime="20240228 21:23:23.964"/>
+<msg timestamp="20240228 22:04:10.982" level="INFO">1543235;Component Oy;15432359;1.10.2022; 15.10.2022;1234567-9;"FI05 1234 5600 7891 01</msg>
+<status status="PASS" starttime="20240228 22:04:10.982" endtime="20240228 22:04:10.982"/>
 </kw>
-<status status="PASS" starttime="20240228 21:23:23.963" endtime="20240228 21:23:23.964"/>
+<status status="PASS" starttime="20240228 22:04:10.981" endtime="20240228 22:04:10.982"/>
 </iter>
 <iter>
 <var name="${element}">";465;111.6;576.6</var>
 <kw name="Log" library="BuiltIn">
 <arg>${element}</arg>
 <doc>Logs the given message with the given level.</doc>
-<msg timestamp="20240228 21:23:23.964" level="INFO">";465;111.6;576.6</msg>
-<status status="PASS" starttime="20240228 21:23:23.964" endtime="20240228 21:23:23.964"/>
+<msg timestamp="20240228 22:04:10.982" level="INFO">";465;111.6;576.6</msg>
+<status status="PASS" starttime="20240228 22:04:10.982" endtime="20240228 22:04:10.982"/>
 </kw>
-<status status="PASS" starttime="20240228 21:23:23.964" endtime="20240228 21:23:23.964"/>
+<status status="PASS" starttime="20240228 22:04:10.982" endtime="20240228 22:04:10.982"/>
 </iter>
 <iter>
-<var name="${element}">153143;Service Provider Oy;1531439;15.12.2022;01.04.2021;1234567-8;FI12 3456 7890 1234 56;2700;648;3348</var>
+<var name="${element}">153143;Service Provider Oy;1531439;15.12.2022;1.4.2021;1234567-8;FI12 3456 7890 1234 56;2700;648;3348</var>
 <kw name="Log" library="BuiltIn">
 <arg>${element}</arg>
 <doc>Logs the given message with the given level.</doc>
-<msg timestamp="20240228 21:23:23.965" level="INFO">153143;Service Provider Oy;1531439;15.12.2022;01.04.2021;1234567-8;FI12 3456 7890 1234 56;2700;648;3348</msg>
-<status status="PASS" starttime="20240228 21:23:23.965" endtime="20240228 21:23:23.965"/>
+<msg timestamp="20240228 22:04:10.983" level="INFO">153143;Service Provider Oy;1531439;15.12.2022;1.4.2021;1234567-8;FI12 3456 7890 1234 56;2700;648;3348</msg>
+<status status="PASS" starttime="20240228 22:04:10.982" endtime="20240228 22:04:10.983"/>
 </kw>
-<status status="PASS" starttime="20240228 21:23:23.964" endtime="20240228 21:23:23.965"/>
+<status status="PASS" starttime="20240228 22:04:10.982" endtime="20240228 22:04:10.983"/>
 </iter>
-<status status="PASS" starttime="20240228 21:23:23.963" endtime="20240228 21:23:23.965"/>
+<status status="PASS" starttime="20240228 22:04:10.981" endtime="20240228 22:04:10.983"/>
 </for>
 <for flavor="IN">
 <var>${element}</var>
@@ -194,98 +194,98 @@ Cleaning Wipes;10;kpl;105;24;252;1302;153143;4
 <kw name="Log" library="BuiltIn">
 <arg>${element}</arg>
 <doc>Logs the given message with the given level.</doc>
-<msg timestamp="20240228 21:23:23.966" level="INFO">Installation Services;5;h;60;24;72;372;143143;1</msg>
-<status status="PASS" starttime="20240228 21:23:23.966" endtime="20240228 21:23:23.966"/>
+<msg timestamp="20240228 22:04:10.984" level="INFO">Installation Services;5;h;60;24;72;372;143143;1</msg>
+<status status="PASS" starttime="20240228 22:04:10.984" endtime="20240228 22:04:10.984"/>
 </kw>
-<status status="PASS" starttime="20240228 21:23:23.966" endtime="20240228 21:23:23.966"/>
+<status status="PASS" starttime="20240228 22:04:10.984" endtime="20240228 22:04:10.984"/>
 </iter>
 <iter>
 <var name="${element}">Replacement Products;10;kpl;105;24;252;1302;143143;2</var>
 <kw name="Log" library="BuiltIn">
 <arg>${element}</arg>
 <doc>Logs the given message with the given level.</doc>
-<msg timestamp="20240228 21:23:23.967" level="INFO">Replacement Products;10;kpl;105;24;252;1302;143143;2</msg>
-<status status="PASS" starttime="20240228 21:23:23.967" endtime="20240228 21:23:23.968"/>
+<msg timestamp="20240228 22:04:10.987" level="INFO">Replacement Products;10;kpl;105;24;252;1302;143143;2</msg>
+<status status="PASS" starttime="20240228 22:04:10.985" endtime="20240228 22:04:10.987"/>
 </kw>
-<status status="PASS" starttime="20240228 21:23:23.966" endtime="20240228 21:23:23.968"/>
+<status status="PASS" starttime="20240228 22:04:10.984" endtime="20240228 22:04:10.987"/>
 </iter>
 <iter>
 <var name="${element}">Keyboard Logitech;10;kpl;40;24;96;496;1543235;1</var>
 <kw name="Log" library="BuiltIn">
 <arg>${element}</arg>
 <doc>Logs the given message with the given level.</doc>
-<msg timestamp="20240228 21:23:23.969" level="INFO">Keyboard Logitech;10;kpl;40;24;96;496;1543235;1</msg>
-<status status="PASS" starttime="20240228 21:23:23.969" endtime="20240228 21:23:23.969"/>
+<msg timestamp="20240228 22:04:10.988" level="INFO">Keyboard Logitech;10;kpl;40;24;96;496;1543235;1</msg>
+<status status="PASS" starttime="20240228 22:04:10.987" endtime="20240228 22:04:10.988"/>
 </kw>
-<status status="PASS" starttime="20240228 21:23:23.968" endtime="20240228 21:23:23.969"/>
+<status status="PASS" starttime="20240228 22:04:10.987" endtime="20240228 22:04:10.988"/>
 </iter>
 <iter>
 <var name="${element}">Brother printer;1;kpl;65;24;15.6;80.6;1543235;2</var>
 <kw name="Log" library="BuiltIn">
 <arg>${element}</arg>
 <doc>Logs the given message with the given level.</doc>
-<msg timestamp="20240228 21:23:23.970" level="INFO">Brother printer;1;kpl;65;24;15.6;80.6;1543235;2</msg>
-<status status="PASS" starttime="20240228 21:23:23.969" endtime="20240228 21:23:23.970"/>
+<msg timestamp="20240228 22:04:10.988" level="INFO">Brother printer;1;kpl;65;24;15.6;80.6;1543235;2</msg>
+<status status="PASS" starttime="20240228 22:04:10.988" endtime="20240228 22:04:10.988"/>
 </kw>
-<status status="PASS" starttime="20240228 21:23:23.969" endtime="20240228 21:23:23.970"/>
+<status status="PASS" starttime="20240228 22:04:10.988" endtime="20240228 22:04:10.988"/>
 </iter>
 <iter>
 <var name="${element}">Installation Services;5;h;60;24;72;372;153143;1</var>
 <kw name="Log" library="BuiltIn">
 <arg>${element}</arg>
 <doc>Logs the given message with the given level.</doc>
-<msg timestamp="20240228 21:23:23.970" level="INFO">Installation Services;5;h;60;24;72;372;153143;1</msg>
-<status status="PASS" starttime="20240228 21:23:23.970" endtime="20240228 21:23:23.970"/>
+<msg timestamp="20240228 22:04:10.989" level="INFO">Installation Services;5;h;60;24;72;372;153143;1</msg>
+<status status="PASS" starttime="20240228 22:04:10.989" endtime="20240228 22:04:10.989"/>
 </kw>
-<status status="PASS" starttime="20240228 21:23:23.970" endtime="20240228 21:23:23.970"/>
+<status status="PASS" starttime="20240228 22:04:10.989" endtime="20240228 22:04:10.989"/>
 </iter>
 <iter>
 <var name="${element}">Replacement Products;10;kpl;105;24;252;1302;153143;2</var>
 <kw name="Log" library="BuiltIn">
 <arg>${element}</arg>
 <doc>Logs the given message with the given level.</doc>
-<msg timestamp="20240228 21:23:23.971" level="INFO">Replacement Products;10;kpl;105;24;252;1302;153143;2</msg>
-<status status="PASS" starttime="20240228 21:23:23.970" endtime="20240228 21:23:23.972"/>
+<msg timestamp="20240228 22:04:10.990" level="INFO">Replacement Products;10;kpl;105;24;252;1302;153143;2</msg>
+<status status="PASS" starttime="20240228 22:04:10.989" endtime="20240228 22:04:10.990"/>
 </kw>
-<status status="PASS" starttime="20240228 21:23:23.970" endtime="20240228 21:23:23.972"/>
+<status status="PASS" starttime="20240228 22:04:10.989" endtime="20240228 22:04:10.990"/>
 </iter>
 <iter>
 <var name="${element}">Cleaning Services;5;h;60;24;72;372;153143;3</var>
 <kw name="Log" library="BuiltIn">
 <arg>${element}</arg>
 <doc>Logs the given message with the given level.</doc>
-<msg timestamp="20240228 21:23:23.973" level="INFO">Cleaning Services;5;h;60;24;72;372;153143;3</msg>
-<status status="PASS" starttime="20240228 21:23:23.972" endtime="20240228 21:23:23.973"/>
+<msg timestamp="20240228 22:04:10.990" level="INFO">Cleaning Services;5;h;60;24;72;372;153143;3</msg>
+<status status="PASS" starttime="20240228 22:04:10.990" endtime="20240228 22:04:10.990"/>
 </kw>
-<status status="PASS" starttime="20240228 21:23:23.972" endtime="20240228 21:23:23.973"/>
+<status status="PASS" starttime="20240228 22:04:10.990" endtime="20240228 22:04:10.990"/>
 </iter>
 <iter>
 <var name="${element}">Cleaning Wipes;10;kpl;105;24;252;1302;153143;4</var>
 <kw name="Log" library="BuiltIn">
 <arg>${element}</arg>
 <doc>Logs the given message with the given level.</doc>
-<msg timestamp="20240228 21:23:23.974" level="INFO">Cleaning Wipes;10;kpl;105;24;252;1302;153143;4</msg>
-<status status="PASS" starttime="20240228 21:23:23.973" endtime="20240228 21:23:23.974"/>
+<msg timestamp="20240228 22:04:10.991" level="INFO">Cleaning Wipes;10;kpl;105;24;252;1302;153143;4</msg>
+<status status="PASS" starttime="20240228 22:04:10.991" endtime="20240228 22:04:10.991"/>
 </kw>
-<status status="PASS" starttime="20240228 21:23:23.973" endtime="20240228 21:23:23.974"/>
+<status status="PASS" starttime="20240228 22:04:10.990" endtime="20240228 22:04:10.991"/>
 </iter>
-<status status="PASS" starttime="20240228 21:23:23.965" endtime="20240228 21:23:23.974"/>
+<status status="PASS" starttime="20240228 22:04:10.983" endtime="20240228 22:04:10.992"/>
 </for>
 <kw name="Set Global Variable" library="BuiltIn">
 <arg>${headers}</arg>
 <doc>Makes a variable available globally in all tests and suites.</doc>
-<msg timestamp="20240228 21:23:23.975" level="INFO">${headers} = ['143143;Service Provider Oy;1431432;15.12.2022;07.04.2021;1234567-8;FI12 3456 7890 1234 56;1350;324;1674', '1543235;Component Oy;15432359;01.10.2022;" 15.10.202";1234567-9;"FI05 1234 5600 7891 01', '...</msg>
-<status status="PASS" starttime="20240228 21:23:23.974" endtime="20240228 21:23:23.975"/>
+<msg timestamp="20240228 22:04:10.992" level="INFO">${headers} = ['143143;Service Provider Oy;1431432;15.12.2022;7.4.2021;1234567-8;FI12 3456 7890 1234 56;1350;324;1674', '1543235;Component Oy;15432359;1.10.2022; 15.10.2022;1234567-9;"FI05 1234 5600 7891 01', '";46...</msg>
+<status status="PASS" starttime="20240228 22:04:10.992" endtime="20240228 22:04:10.992"/>
 </kw>
 <kw name="Set Global Variable" library="BuiltIn">
 <arg>${rows}</arg>
 <doc>Makes a variable available globally in all tests and suites.</doc>
-<msg timestamp="20240228 21:23:23.975" level="INFO">${rows} = ['Installation Services;5;h;60;24;72;372;143143;1', 'Replacement Products;10;kpl;105;24;252;1302;143143;2', 'Keyboard Logitech;10;kpl;40;24;96;496;1543235;1', 'Brother printer;1;kpl;65;24;15.6;80.6;15...</msg>
-<status status="PASS" starttime="20240228 21:23:23.975" endtime="20240228 21:23:23.975"/>
+<msg timestamp="20240228 22:04:10.993" level="INFO">${rows} = ['Installation Services;5;h;60;24;72;372;143143;1', 'Replacement Products;10;kpl;105;24;252;1302;143143;2', 'Keyboard Logitech;10;kpl;40;24;96;496;1543235;1', 'Brother printer;1;kpl;65;24;15.6;80.6;15...</msg>
+<status status="PASS" starttime="20240228 22:04:10.992" endtime="20240228 22:04:10.993"/>
 </kw>
-<status status="PASS" starttime="20240228 21:23:23.900" endtime="20240228 21:23:23.976"/>
+<status status="PASS" starttime="20240228 22:04:10.907" endtime="20240228 22:04:10.993"/>
 </test>
-<status status="PASS" starttime="20240228 21:23:23.857" endtime="20240228 21:23:23.976"/>
+<status status="PASS" starttime="20240228 22:04:10.864" endtime="20240228 22:04:10.994"/>
 </suite>
 <statistics>
 <total>
@@ -298,6 +298,5 @@ Cleaning Wipes;10;kpl;105;24;252;1302;153143;4
 </suite>
 </statistics>
 <errors>
-<msg timestamp="20240228 21:23:23.897" level="ERROR">Error in file 'c:\Users\royha\OneDrive - Hämeen ammattikorkeakoulu\Software Robotics and Automation\SoftwareRoboticsProject\Project files - UiPath Studio, Robot Framework\RobotFramework\rf_project.robot' on line 6: Library setting requires value.</msg>
 </errors>
 </robot>
