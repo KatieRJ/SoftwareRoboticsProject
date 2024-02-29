@@ -4,6 +4,7 @@ Library    Collections
 Library    OperatingSystem
 Library    DatabaseLibrary
 Library    DateTime
+Library    validation.py
 
 *** Variables ***
 ${PATH}    C:/Users/royha/OneDrive - Hämeen ammattikorkeakoulu/Software Robotics and Automation/SoftwareRoboticsProject/Project files - UiPath Studio, Robot Framework/RobotFramework/
@@ -74,21 +75,84 @@ Read CSV file to list
 
 *** Keywords ***
 Add Invoice Header to DB 
-    [Arguments]    ${items}
+    [Arguments]    ${items}    ${rows}
     Make Connection    ${dbname}
 
     # Set dateformat
     ${invoiceDate}=    Convert Date    ${items}[3]    date_format=%d.%m.%Y    result_format=%Y-%m-%d
     ${dueDate}=    Convert Date    ${items}[4]    date_format=%d.%m.%Y    result_format=%Y-%m-%d
 
+    # Invoice status variable
+    ${InvoiceStatus}=    Set Variable    0
+    ${InvoiceComment}=    Set Variable    All OK 
+
+    # Reference number validation
+    ${refStatus}=    Is Reference Correct    ${items}[2]
+    IF    not ${refStatus}
+        ${InvoiceStatus}=    Set Variable    1
+        ${InvoiceComment}=    Set Variable    Reference number error 
+    END
+    
+    # IBAN number validation
+    ${ibanStatus}=    Check IBAN    ${items}[6]
+    IF    not ${ibanStatus}
+        ${InvoiceStatus}=    Set Variable    2
+        ${InvoiceComment}=    Set Variable    IBAN number error 
+    END
+
+    # Amount validation
+    ${sumStatus}=    Check Amounts From Invoice    ${items}[9]    ${rows}
+    IF    not ${sumStatus}
+        ${InvoiceStatus}=    Set Variable    3
+        ${InvoiceComment}=    Set Variable    Amount difference 
+    END
+
 
     ${foreignKeyChecks0}=    Set Variable    SET FOREIGN_KEY_CHECKS=0;
-    ${insertStmt}=    Set Variable    insert into invoiceheader (invoicenumber, companyname, companycode, referencenumber, invoicedate, duedate, bankaccountnumber, amountexclvat, vat, totalamount, invoicestatus_id, comments) values ('${items}[0]','${items}[1]','${items}[5]','${items}[2]','${invoiceDate}','${dueDate}','${items}[6]',0,0,0,0,'');
+    ${insertStmt}=    Set Variable    insert into invoiceheader (invoicenumber, companyname, companycode, referencenumber, invoicedate, duedate, bankaccountnumber, amountexclvat, vat, totalamount, invoicestatus_id, comments) values ('${items}[0]', '${items}[1]', '${items}[5]', '${items}[2]', '${invoiceDate}', '${dueDate}', '${items}[6]', '${items}[7]', '${items}[8]', '${items}[9]', '${InvoiceStatus}', '${InvoiceComment}');
    # ${foreignKeyChecks1}=    Set Variable    SET FOREIGN_KEY_CHECKS=1;
 
     Execute Sql String    ${foreignKeyChecks0}
     Execute Sql String    ${insertStmt}
    # Execute Sql String    ${foreignKeyChecks1}
+
+*** Keywords ***
+Check Amounts From Invoice
+    [Arguments]    ${totalSumFromHeader}    ${invoiceRows}
+    ${status}=    Set Variable    ${False}
+    
+    ${totalAmountFromRows}=    Evaluate    0
+
+    FOR    ${element}    IN    @{invoiceRows}
+        #Log    ${element}[8]
+        ${totalAmountFromRows}=    Evaluate    ${totalAmountFromRows}+${element}[8]
+    END
+
+
+    ${diff}=    Convert To Number    0.01
+    ${totalSumFromHeader}=    Convert To Number    ${totalSumFromHeader} 
+    ${totalAmountFromRows}=    Convert To Number    ${totalAmountFromRows}
+
+    ${status}=    Is Equal    ${totalSumFromHeader}    ${totalAmountFromRows}    ${diff}
+
+    [Return]    ${status}
+
+*** Keywords ***
+Check IBAN 
+    [Arguments]    ${iban}
+    ${iban}=    Remove String    ${iban}    ${SPACE}
+    ${status}=    Set Variable    ${False}
+    #Log To Console   ${iban}
+
+    ${length}=    Get Length    ${iban}
+
+    #Log To Console    ${length}
+
+    IF    ${length} == 18
+        ${status}=    Set Variable    ${True}
+    END
+    [Return]    ${status}
+
 
 *** Keywords ***
 Add Invoice Row To DB
@@ -143,10 +207,10 @@ Loop all invoicerows
 
                         Log    Invoice found
 
-                        # TODO: Validation
+                        # Validations when adding
 
                         # Input invoice header row into DB
-                        Add Invoice Header to DB    ${headerItems}
+                        Add Invoice Header to DB    ${headerItems}    ${ListToDB}
 
                         # Input invoice rows into DB
                         FOR    ${rowElement}    IN    @{ListToDB}
@@ -183,11 +247,11 @@ Loop all invoicerows
                 IF    '${headerItems}[0]' == '${InvoiceNumber}'
 
                     Log    Invoice found
-
-                    # TODO: Validation
+                    
+                    # Validations when adding
 
                     # Input invoice header row into DB
-                    Add Invoice Header to DB    ${headerItems}
+                    Add Invoice Header to DB    ${headerItems}    ${ListToDB}
 
                     # Input invoice rows into DB
                     FOR    ${rowElement}    IN    @{ListToDB}
