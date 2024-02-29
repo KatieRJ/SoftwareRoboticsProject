@@ -6,7 +6,7 @@ Library    DatabaseLibrary
 Library    DateTime
 
 *** Variables ***
-${PATH}    C:/Users/royha/OneDrive - Hämeen ammattikorkeakoulu/Software Robotics and Automation/Project/RobotFramework/
+${PATH}    C:/Users/royha/OneDrive - Hämeen ammattikorkeakoulu/Software Robotics and Automation/SoftwareRoboticsProject/Project files - UiPath Studio, Robot Framework/RobotFramework/
 @{ListToDB}
 ${InvoiceNumber}    empty
 

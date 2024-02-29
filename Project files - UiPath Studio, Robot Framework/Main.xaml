@@ -340,8 +340,7 @@
                   </Assign.To>
                   <Assign.Value>
                     <InArgument x:TypeArguments="x:String" xml:space="preserve">[pdftext.Substring(
-    pdftext.IndexOf(vbCrLf, pdftext.IndexOf("Duedate:") + 10) - 10,
-    11
+    pdftext.IndexOf(vbCrLf, pdftext.IndexOf("Duedate:") + 10) - 10, 10
 )]</InArgument>
                   </Assign.Value>
                 </Assign>
