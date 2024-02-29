@@ -3,6 +3,7 @@ Library    String
 Library    Collections
 Library    OperatingSystem
 Library    DatabaseLibrary
+Library    DateTime
 
 *** Variables ***
 ${PATH}    C:/Users/royha/OneDrive - Hämeen ammattikorkeakoulu/Software Robotics and Automation/Project/RobotFramework/
@@ -21,8 +22,27 @@ Make Connection
     [Arguments]    ${dbtoconnect}
     Connect To Database    pymysql    ${dbtoconnect}    ${dbuser}    ${dbpass}    ${dbhost}    ${dbport}
 
-*** Test Cases ***
 
+*** Keywords ***
+Add Row Data to list
+    [Arguments]    ${items}
+    
+    @{AddInvoiceRowData}=    Create List
+    Append To List    ${AddInvoiceRowData}    ${InvoiceNumber}
+    Append To List    ${AddInvoiceRowData}    ${items}[8]
+    Append To List    ${AddInvoiceRowData}    ${items}[0]
+    Append To List    ${AddInvoiceRowData}    ${items}[1]
+    Append To List    ${AddInvoiceRowData}    ${items}[2]
+    Append To List    ${AddInvoiceRowData}    ${items}[3]
+    Append To List    ${AddInvoiceRowData}    ${items}[4]
+    Append To List    ${AddInvoiceRowData}    ${items}[5]
+    Append To List    ${AddInvoiceRowData}    ${items}[6]
+
+    Append To List    ${ListToDB}    ${AddInvoiceRowData}
+
+
+
+*** Test Cases ***
 Read CSV file to list
     #Make Connection    ${dbname}
     ${outputHeader}=    Get File    ${PATH}InvoiceHeaderData.csv
@@ -52,6 +72,32 @@ Read CSV file to list
     Set Global Variable    ${headers}
     Set Global Variable    ${rows}
 
+*** Keywords ***
+Add Invoice Header to DB 
+    [Arguments]    ${items}
+    Make Connection    ${dbname}
+
+    # Set dateformat
+    ${invoiceDate}=    Convert Date    ${items}[3]    date_format=%d.%m.%Y    result_format=%Y-%m-%d
+    ${dueDate}=    Convert Date    ${items}[4]    date_format=%d.%m.%Y    result_format=%Y-%m-%d
+
+
+    ${foreignKeyChecks0}=    Set Variable    SET FOREIGN_KEY_CHECKS=0;
+    ${insertStmt}=    Set Variable    insert into invoiceheader (invoicenumber, companyname, companycode, referencenumber, invoicedate, duedate, bankaccountnumber, amountexclvat, vat, totalamount, invoicestatus_id, comments) values ('${items}[0]','${items}[1]','${items}[5]','${items}[2]','${invoiceDate}','${dueDate}','${items}[6]',0,0,0,0,'');
+   # ${foreignKeyChecks1}=    Set Variable    SET FOREIGN_KEY_CHECKS=1;
+
+    Execute Sql String    ${foreignKeyChecks0}
+    Execute Sql String    ${insertStmt}
+   # Execute Sql String    ${foreignKeyChecks1}
+
+*** Keywords ***
+Add Invoice Row To DB
+    [Arguments]    ${items}
+    Make Connection    ${dbname}
+    ${insertStmt}=    Set Variable    insert into invoicerow (invoicenumber, rownumber, description, quantity, unit, unitprice, vatpercent, vat, total) values ('${items}[0]', '${items}[1]', '${items}[2]', '${items}[3]', '${items}[4]', '${items}[5]', '${items}[6]', '${items}[7]', '${items}[8]');
+    Execute Sql String    ${insertStmt}
+
+
 *** Test Cases ***
 Loop all invoicerows 
     FOR    ${element}    IN    @{rows}
@@ -60,9 +106,95 @@ Loop all invoicerows
         # Splitting row's data to their own elements
         @{items}=    Split String    ${element}    ; 
 
-        # Haetaan käsiteltävän rivin laskunumero
+        # The invoice number of the line being processed is retrieved
         ${rowInvoiceNumber}=    Set Variable    ${items}[7]
         
         Log    ${rowInvoiceNumber}
         Log    ${InvoiceNumber}
+
+        # Check if the processing invoice number changes according to the process diagram
+        IF    '${rowInvoiceNumber}' == '${InvoiceNumber}'
+            Log    Add rows to the invoice 
+
+            # Add processing invoice data to list
+            Add Row Data to List    ${items}        
+    
+
+        ELSE
+            Log    Need to check if database list already has rows 
+            ${length}=    Get Length    ${ListToDB}
+
+            IF    ${length} == ${0}
+                Log    First invoice case
+                # Update invoice number
+                ${InvoiceNumber}=    Set Variable    ${rowInvoiceNumber}
+                Set Global Variable    ${InvoiceNumber}
+
+                # Add processing invoice data to list
+                Add Row Data to List    ${items}
+
+            ELSE
+                Log    Invoice changes, need to also process header data
+
+                # Search invoice header row 
+                FOR    ${headerElement}    IN    @{headers}
+                    ${headerItems}=    Split String    ${headerElement}    ;
+                    IF    '${headerItems}[0]' == '${InvoiceNumber}'
+
+                        Log    Invoice found
+
+                        # TODO: Validation
+
+                        # Input invoice header row into DB
+                        Add Invoice Header to DB    ${headerItems}
+
+                        # Input invoice rows into DB
+                        FOR    ${rowElement}    IN    @{ListToDB}
+                            Add Invoice Row To DB    ${rowElement}
+                            
+                        END
+
+                    END
+                    
+                END
+
+
+                # Prepare process for the next invoice
+                @{ListToDB}    Create List
+                Set Global Variable    ${ListToDB}
+                ${InvoiceNumber}=    Set Variable    ${rowInvoiceNumber}
+                Set Global Variable    ${InvoiceNumber}
+
+                # Add processing invoice data to list
+                Add Row Data to List    ${items}
+            END
+                
+        END
+
+    END
+
+    # Last invoice case 
+    ${length}=    Get Length    ${ListToDB}
+    IF    ${length} > ${0}
+        Log    Processing last invoice header 
+            # Search invoice header row 
+            FOR    ${headerElement}    IN    @{headers}
+                ${headerItems}=    Split String    ${headerElement}    ;
+                IF    '${headerItems}[0]' == '${InvoiceNumber}'
+
+                    Log    Invoice found
+
+                    # TODO: Validation
+
+                    # Input invoice header row into DB
+                    Add Invoice Header to DB    ${headerItems}
+
+                    # Input invoice rows into DB
+                    FOR    ${rowElement}    IN    @{ListToDB}
+                        Add Invoice Row To DB    ${rowElement}
+                        
+                    END            
+                END
+                
+         END
     END
