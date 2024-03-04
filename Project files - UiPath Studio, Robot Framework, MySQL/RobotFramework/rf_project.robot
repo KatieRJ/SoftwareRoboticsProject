@@ -7,8 +7,8 @@ Library    DateTime
 Library    validation.py
 
 *** Variables ***
-${PATH}    C:/Users/royha/OneDrive - Hämeen ammattikorkeakoulu/Software Robotics and Automation/SoftwareRoboticsProject/Project files - UiPath Studio, Robot Framework/RobotFramework/
-@{ListToDB}
+${PATH}    C:/Users/royha/OneDrive - Hämeen ammattikorkeakoulu/Software Robotics and Automation/SoftwareRoboticsProject/Project files - UiPath Studio, Robot Framework/
+@{ListToDB} 
 ${InvoiceNumber}    empty
 
 # Database related auxiliary variables
