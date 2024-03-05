@@ -6,9 +6,10 @@ Library     DatabaseLibrary
 Library     DateTime
 Library     validation.py
 
+
 *** Variables ***
 ${PATH}             C:/Users/royha/OneDrive - Hämeen ammattikorkeakoulu/Software Robotics and Automation/SoftwareRoboticsProject/Project files - UiPath Studio, Robot Framework, MySQL/RobotFramework/
-@{ListToDB}         
+@{ListToDB}         @{EMPTY}
 ${InvoiceNumber}    empty
 
 # Database related auxiliary variables
@@ -187,7 +188,6 @@ Add Invoice Header to DB
     END
 
     ${foreignKeyChecks0}=    Set Variable    SET FOREIGN_KEY_CHECKS=0;
-    # ${foreignKeyChecks1}=    Set Variable    SET FOREIGN_KEY_CHECKS=1;
     ${insertStmt}=    Set Variable
     ...    insert into invoiceheader (invoicenumber, companyname, companycode, referencenumber, invoicedate, duedate, bankaccountnumber, amountexclvat, vat, totalamount, invoicestatus_id, comments) values ('${items}[0]', '${items}[1]', '${items}[5]', '${items}[2]', '${invoiceDate}', '${dueDate}', '${items}[6]', '${items}[7]', '${items}[8]', '${items}[9]', '${InvoiceStatus}', '${InvoiceComment}');
     # ${foreignKeyChecks1}=    Set Variable    SET FOREIGN_KEY_CHECKS=1;
